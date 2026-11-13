@@ -36,7 +36,7 @@ export async function explainResult(kind, facts, fallbackText) {
 function buildPrompt(kind, facts) {
   return [
     'You help people send money home safely. Explain the result below to the user.',
-    'Use one or two short, friendly sentences in plain English. No jargon.',
+    'Use one or two clear, professional sentences in plain English. No jargon.',
     'Do not change the result. Tell them the one thing to do next.',
     'Reply with JSON only, like this: {"explanation": "..."}',
     '',

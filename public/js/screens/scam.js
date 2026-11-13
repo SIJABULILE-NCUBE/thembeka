@@ -19,9 +19,9 @@ export async function show(screenArea, state) {
 
     <form id="scam-form" class="card" novalidate>
       <div class="field">
-        <label class="label" for="message">The message that asked for money</label>
-        <textarea class="textarea" id="message" placeholder="Paste the WhatsApp or SMS here">${escapeHtml(state.message)}</textarea>
-        <div class="hint">Try a demo message:</div>
+        <label class="label" for="message">Message requesting payment</label>
+        <textarea class="textarea" id="message" placeholder="Paste the WhatsApp message or SMS here">${escapeHtml(state.message)}</textarea>
+        <div class="hint">Demonstration messages:</div>
       </div>
       <div class="chip-row">${demoButtons.join('')}</div>
       <button class="btn btn-primary" type="submit" id="check-button">Check this message</button>
@@ -45,7 +45,7 @@ export async function show(screenArea, state) {
 
     try {
       const button = screenArea.querySelector('#check-button');
-      await withLoading(button, 'Checking on your phone...', async () => {
+      await withLoading(button, 'Analysing on your device…', async () => {
         state.scamCheck = await callApi('/scam/check', {
           recipientId: state.recipientId,
           amountCents: state.amountCents,
@@ -85,7 +85,7 @@ function showResult(screenArea, state) {
     const percent = Math.round(check.closestScam.score * 100);
     extraHtml += `
       <div class="detail-box">
-        <strong>Closest known scam:</strong> ${escapeHtml(patternName)} (${percent}% similar)
+        <strong>Closest known scam pattern:</strong> ${escapeHtml(patternName)} (${percent}% similarity)
       </div>
     `;
   }
@@ -96,7 +96,7 @@ function showResult(screenArea, state) {
     const stop = Math.round(check.decision.stop * 100);
     extraHtml += `
       <div class="detail-box">
-        <strong>Decision model:</strong> ${pass}% safe, ${review}% check, ${stop}% scam
+        <strong>Risk assessment model:</strong> ${pass}% low risk, ${review}% review, ${stop}% high risk
         <div class="meter" aria-hidden="true">
           <span class="meter-pass" style="width:${pass}%"></span>
           <span class="meter-review" style="width:${review}%"></span>
@@ -108,7 +108,7 @@ function showResult(screenArea, state) {
 
   extraHtml += `<p class="muted" style="margin-top:12px">${copy.scamYouDecide}</p>`;
 
-  const buttonText = check.result === 'pass' ? 'Continue' : 'Continue anyway';
+  const buttonText = check.result === 'pass' ? 'Continue' : 'Proceed with caution';
   const buttonStyle = check.result === 'stop' ? 'btn-secondary' : 'btn-primary';
 
   screenArea.querySelector('#scam-result').innerHTML =
@@ -120,7 +120,7 @@ function showResult(screenArea, state) {
       extraHtml
     }) +
     `<button class="btn ${buttonStyle}" id="continue">${buttonText}</button>
-     <button class="btn btn-link" id="cancel">Cancel this send</button>`;
+     <button class="btn btn-link" id="cancel">Cancel transfer</button>`;
 
   screenArea.querySelector('#continue').addEventListener('click', () => goTo('approve'));
   screenArea.querySelector('#cancel').addEventListener('click', () => {

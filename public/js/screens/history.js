@@ -8,10 +8,10 @@ import { goTo } from '../app.js';
 export async function show(screenArea) {
   const sends = await callApi('/history');
 
-  let listHtml = '<p class="muted">No sends yet.</p>';
+  let listHtml = '<p class="muted">No transfers yet.</p>';
   if (sends.length > 0) {
     listHtml = sends.map((send) => {
-      const status = send.confirmed ? 'Received' : 'Waiting';
+      const status = send.confirmed ? 'Confirmed' : 'Awaiting confirmation';
       return `
         <div class="history-item">
           <div>
@@ -30,9 +30,9 @@ export async function show(screenArea) {
   }
 
   screenArea.innerHTML = `
-    <h1>History</h1>
+    <h1>Transaction history</h1>
     <section class="card">${listHtml}</section>
-    <button class="btn btn-secondary" id="back">Back home</button>
+    <button class="btn btn-secondary" id="back">Back to home</button>
   `;
 
   screenArea.querySelector('#back').addEventListener('click', () => goTo('home'));

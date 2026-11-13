@@ -14,19 +14,19 @@ export async function show(screenArea, state) {
 
   screenArea.innerHTML = `
     ${stepsBar(2)}
-    <h1>How much are you sending?</h1>
+    <h1>Transfer amount</h1>
 
     <form id="cost-form" class="card" novalidate>
       <div class="field">
-        <label class="label" for="recipient">Send to</label>
+        <label class="label" for="recipient">Recipient</label>
         <select class="select" id="recipient">${recipientOptions.join('')}</select>
       </div>
       <div class="field">
-        <label class="label" for="amount">Amount in rand</label>
+        <label class="label" for="amount">Amount (ZAR)</label>
         <input class="input" id="amount" type="number" inputmode="decimal" min="1" step="1"
           value="${state.amountCents / 100}" />
       </div>
-      <button class="btn btn-primary" type="submit" id="compare-button">Compare the true cost</button>
+      <button class="btn btn-primary" type="submit" id="compare-button">Compare total cost</button>
       <div id="cost-error" class="error" role="alert"></div>
     </form>
 
@@ -44,7 +44,7 @@ export async function show(screenArea, state) {
 
     try {
       const button = screenArea.querySelector('#compare-button');
-      await withLoading(button, 'Working it out...', async () => {
+      await withLoading(button, 'Calculating…', async () => {
         state.costComparison = await callApi('/cost', { amountCents: state.amountCents });
       });
       showComparison(screenArea, state);
@@ -87,11 +87,11 @@ function showComparison(screenArea, state) {
 
   screenArea.querySelector('#cost-result').innerHTML = `
     <section class="card">
-      <h2>What they receive</h2>
+      <h2>Amount received by the recipient</h2>
       <p>${escapeHtml(comparison.summary)}</p>
       <table class="compare">
         <thead>
-          <tr><th scope="col">Option</th><th scope="col">Fee</th><th scope="col">They get</th></tr>
+          <tr><th scope="col">Option</th><th scope="col">Fee</th><th scope="col">Received</th></tr>
         </thead>
         <tbody>${rows.join('')}</tbody>
       </table>

@@ -65,12 +65,12 @@ In one documented case, an agent charged a 15% commission and the sender spent a
 
 | Country / region | What informal money carriers and changers are commonly called |
 |---|---|
-| Zimbabwe | *Omalayitsha* (cross-border couriers), *osiphatheleni* (street money changers, Bulawayo) |
+| Zimbabwe | *Omalayisha* (cross-border couriers), *osiphatheleni* (street money changers, Bulawayo) |
 | Malawi | *Onyamula katundu* (Chichewa: transporters who carry goods and money home) |
 | Mozambique, Angola | *Cambistas* (street money changers) |
 | DRC | *Cambistes* (street money changers) |
 | Nigeria | *Aboki* or *mallam* FX dealers (street changers) |
-| Somalia, East Africa | *Hawala* (informal transfer networks) |
+| East Africa (Kenya, Tanzania, Somalia) | *Hawala* (informal transfer networks) |
 
 In the app and pitch they are called **informal money carriers and changers**.
 

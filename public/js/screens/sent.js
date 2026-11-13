@@ -38,14 +38,14 @@ export async function show(screenArea, state) {
 function draw(screenArea, send) {
   const name = escapeHtml(send.recipientName);
   const statusHtml = send.confirmed
-    ? `<div class="card card-highlight"><strong>${name} confirmed</strong>: the money arrived.</div>`
-    : `<div class="card"><span class="status-dot"></span>Waiting for ${name} to confirm...</div>`;
+    ? `<div class="card card-highlight"><strong>${name} has confirmed receipt.</strong></div>`
+    : `<div class="card"><span class="status-dot"></span>Awaiting confirmation from ${name}…</div>`;
 
   const simulatedHtml = send.simulated ? `<p class="muted">${copy.simulatedNote}</p>` : '';
 
   screenArea.innerHTML = `
     <img class="big-tick" src="img/logo.svg" alt="" />
-    <h1 class="center">Sent to ${name}</h1>
+    <h1 class="center">Transfer sent to ${name}</h1>
     <p class="recipient-amount">${formatUsd(send.amountUsdCents)}</p>
     ${statusHtml}
 

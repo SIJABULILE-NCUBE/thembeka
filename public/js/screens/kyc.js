@@ -57,7 +57,7 @@ export async function show(screenArea, state) {
     state.kycVerified = false;
 
     const button = screenArea.querySelector('#check-button');
-    await withLoading(button, 'Checking on your phone...', async () => {
+    await withLoading(button, 'Checking on your device…', async () => {
       state.kycResult = await callApi('/kyc/check', { details: state.kycDetails });
     });
 
@@ -83,7 +83,7 @@ function showResult(screenArea, state) {
     `;
   } else if (check.result !== 'stop') {
     actionsHtml = `
-      <p class="muted">Your details only leave your phone when you tap Submit.</p>
+      <p class="muted">Your details remain on your device until you select Submit.</p>
       <button class="btn btn-primary" id="submit">Submit to ${state.demo.providerName}</button>
     `;
   }
@@ -99,7 +99,7 @@ function showResult(screenArea, state) {
   if (submitButton) {
     submitButton.addEventListener('click', async () => {
       try {
-        await withLoading(submitButton, copy.kycSubmitted + '...', async () => {
+        await withLoading(submitButton, 'Submitting…', async () => {
           await callApi('/kyc/submit', { details: state.kycDetails });
         });
         state.kycVerified = true;

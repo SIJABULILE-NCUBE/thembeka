@@ -185,7 +185,7 @@ Build the look first with fake data, so it can be checked visually before any lo
 3. `public/js/app.js`: very simple screen switching, e.g. `showScreen('home')`, by swapping the contents of `<main>`. No router library.
 4. `public/js/screens/`: one file per screen from PRD section 7 (home, kyc, cost, scam, approve, sent, recipient, history). Each exports a `render(data)` function that returns HTML, plus small event handlers.
 5. Use **fake data** in each screen for now (a hard-coded result object), clearly marked with `// TODO Phase 5: replace with API call`.
-6. Result cards always show colour + icon + word (Looks safe / Check first / Stop).
+6. Result cards always show colour + icon + word (Low risk / Review required / High risk).
 7. Every check shows **who did it**, using the exact wording in PRD section 8 ("Who does what"): "Pre-check by Thembeka", "Safety check by Thembeka", "Sent to Demo Licensed Provider for official verification", "Verified by Demo Licensed Provider". Keep these strings in one file, `public/js/copy.js`, so they are easy to find and change.
 
 **Checks**
@@ -256,13 +256,13 @@ Select-String -Path node_modules\@qvac\sdk\dist\**\*.d.ts -Pattern "EMBED|LIA|DE
 2. Also check the QVAC docs at https://docs.qvac.tether.io/sdk/js-ts-sdk/ for the embeddings and decision model examples.
 3. **Report back** which of these exist in 0.22.0:
    - an embedding model constant and an embedding function
-   - the Lia decision model constant and how to call it
+   - the Laya decision model constant and how to call it
 4. If either is missing in 0.22.0, **stop and ask** before upgrading. The plan is: upgrade only this project to `@qvac/sdk@0.23.x`, run `npm test` and `npm run check-models`, and keep 0.22.0 if anything breaks.
 
 **Step 4.2: Build the AI files**
 
 1. `src/ai/models.js`
-   - `loadAllModels()`: loads Qwen3 0.6B Q4 first, then the embedding model, then Lia. Logs progress. If one fails to load, logs it and carries on (that feature falls back to code only).
+   - `loadAllModels()`: loads Qwen3 0.6B Q4 first, then the embedding model, then Laya. Logs progress. If one fails to load, logs it and carries on (that feature falls back to code only).
    - `getModelIds()`: returns the loaded ids (or `null` for any that failed).
    - `unloadAllModels()`: unloads all and calls `close()`. Called on `SIGINT`.
 2. `src/ai/explain.js` exports `explainResult(kind, facts)`:
@@ -274,7 +274,7 @@ Select-String -Path node_modules\@qvac\sdk\dist\**\*.d.ts -Pattern "EMBED|LIA|DE
    - `findClosestScams(message)`: embeds the message with **the same model**, compares with cosine similarity, returns the top 2 `{ pattern, text, score }`.
    - If the SDK has a built-in RAG search that does the same job offline, use it instead and note it in a comment.
 4. `src/ai/decision.js` exports `classifyMessage(message)`:
-   - Calls Lia with the labels `pass`, `review`, `stop` and returns `{ pass, review, stop }` probabilities.
+   - Calls Laya with the labels `pass`, `review`, `stop` and returns `{ pass, review, stop }` probabilities.
    - 10 second timeout; returns `null` on failure.
 5. `scripts/checkModels.js`: loads all models, runs one example through each, prints the results and how long each took, then unloads.
 
@@ -295,7 +295,7 @@ Select-String -Path node_modules\@qvac\sdk\dist\**\*.d.ts -Pattern "EMBED|LIA|DE
 2. `POST /api/scam/check` order:
    1. `checkTransfer` (code flags)
    2. `findClosestScams` (embeddings)
-   3. `classifyMessage` (Lia)
+   3. `classifyMessage` (Laya)
    4. `combineResult`
    5. `explainResult`
    - returns `aiUsed: true` only if steps 2 to 5 used AI successfully.
@@ -352,7 +352,7 @@ npm install @tetherto/wdk @tetherto/wdk-wallet-evm
 **Steps**
 
 1. Save each completed send to `data/history.json` (gitignored): date, recipient, amount, result, reference, confirmed.
-2. Recipient view (`/recipient` screen): shows the latest send to Grandma Moyo with a large **Received** button that calls `/api/send/confirm`.
+2. Recipient view (`/recipient` screen): shows the latest send to Grandma Moyo with a large **Confirm receipt** button that calls `/api/send/confirm`.
 3. Sender's Sent screen checks every 3 seconds and changes to "Grandma Moyo confirmed".
 4. History screen lists sends, newest first.
 5. Polish pass:

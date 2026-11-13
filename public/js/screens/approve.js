@@ -13,7 +13,7 @@ export async function show(screenArea, state) {
     return;
   }
 
-  screenArea.innerHTML = `${stepsBar(4)}<h1>${copy.approveTitle}</h1><p class="muted">Preparing your send...</p>`;
+  screenArea.innerHTML = `${stepsBar(4)}<h1>${copy.approveTitle}</h1><p class="muted">Preparing your transfer…</p>`;
 
   try {
     state.preparedSend = await callApi('/send/prepare', {
@@ -30,7 +30,7 @@ export async function show(screenArea, state) {
 
   const send = state.preparedSend;
   const safetyWord = copy.resultWords[send.safetyResult];
-  const kycText = send.kycStatus === 'verified' ? copy.kycVerified : 'Not verified yet';
+  const kycText = send.kycStatus === 'verified' ? copy.kycVerified : 'Not yet verified';
 
   // Extra confirmation boxes appear only when the safety check found warning signs.
   let confirmHtml = '';
@@ -53,12 +53,12 @@ export async function show(screenArea, state) {
 
     <section class="card">
       <dl class="summary">
-        <div class="summary-row"><dt>To</dt><dd>${escapeHtml(send.recipientName)}</dd></div>
-        <div class="summary-row"><dt>You pay</dt><dd>${formatRand(send.amountRandCents)}</dd></div>
+        <div class="summary-row"><dt>Recipient</dt><dd>${escapeHtml(send.recipientName)}</dd></div>
+        <div class="summary-row"><dt>Amount paid</dt><dd>${formatRand(send.amountRandCents)}</dd></div>
         <div class="summary-row"><dt>Thembeka fee (fixed)</dt><dd>${formatRand(send.feeRandCents)}</dd></div>
-        <div class="summary-row"><dt>They receive</dt><dd class="amount-small">${formatUsd(send.amountUsdCents)} USDT</dd></div>
+        <div class="summary-row"><dt>Amount received</dt><dd class="amount-small">${formatUsd(send.amountUsdCents)} USDT</dd></div>
         <div class="summary-row"><dt>Safety check</dt><dd>${safetyWord}</dd></div>
-        <div class="summary-row"><dt>ID check</dt><dd>${kycText}</dd></div>
+        <div class="summary-row"><dt>Identity verification</dt><dd>${kycText}</dd></div>
       </dl>
     </section>
 
@@ -82,7 +82,7 @@ export async function show(screenArea, state) {
 
   approveButton.addEventListener('click', async () => {
     try {
-      await withLoading(approveButton, 'Sending...', async () => {
+      await withLoading(approveButton, 'Sending…', async () => {
         state.lastSend = await callApi('/send/approve', {
           preparedId: send.preparedId,
           confirmedByUser: boxes.length > 0

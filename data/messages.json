@@ -1,7 +1,7 @@
 [
   {
     "id": "genuine",
-    "label": "Grandma Moyo's real request",
+    "label": "Genuine request: school fees",
     "recipientId": "grandma-moyo",
     "amountCents": 150000,
     "text": "Tendai my child, school fees for your cousin are due on Friday. Thank you, Grandma.",
@@ -9,7 +9,7 @@
   },
   {
     "id": "scam-brother",
-    "label": "Brother on a new number",
+    "label": "Scam: family member on a new number",
     "recipientId": "unknown-sender",
     "amountCents": 200000,
     "text": "Hi it's your brother, new number, send R2,000 urgently, don't tell mum.",
@@ -17,7 +17,7 @@
   },
   {
     "id": "scam-prize",
-    "label": "You won a phone",
+    "label": "Scam: prize delivery fee",
     "recipientId": "unknown-sender",
     "amountCents": 35000,
     "text": "Congratulations! You won a phone. Pay R350 delivery fee to claim it today.",

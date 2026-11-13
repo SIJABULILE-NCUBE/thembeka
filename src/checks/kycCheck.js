@@ -63,7 +63,7 @@ export function checkKyc(details, accountName, today = new Date()) {
   const pattern = config.documentNumberPatterns[details.documentType];
   const cleanNumber = String(details.documentNumber).toUpperCase().replace(/\s/g, '');
   if (pattern && !pattern.test(cleanNumber)) {
-    stopReasons.push('The document number does not look right for this document type.');
+    stopReasons.push('The document number is not in a valid format for this document type.');
   }
 
   if (stopReasons.length > 0) {
@@ -74,7 +74,7 @@ export function checkKyc(details, accountName, today = new Date()) {
   const monthsLeft = getMonthsBetween(today, expiryDate);
   if (monthsLeft < config.expiryWarningMonths) {
     reviewReasons.push(
-      `This document expires on ${details.expiryDate}. Renew it soon, or the provider may not accept it.`
+      `This document expires on ${details.expiryDate}. Please renew it soon, as the provider may not accept it.`
     );
   }
 

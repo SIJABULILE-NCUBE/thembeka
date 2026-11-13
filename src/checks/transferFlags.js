@@ -14,19 +14,19 @@ export function checkTransfer(transfer, senderProfile, history = []) {
   // A new recipient is the most common sign in "new number" scams.
   const knownRecipients = senderProfile.knownRecipients || [];
   if (!knownRecipients.includes(transfer.recipientId)) {
-    flags.push({ id: 'new_recipient', reason: 'You have not sent money to this person before.' });
+    flags.push({ id: 'new_recipient', reason: 'You have not sent money to this recipient before.' });
   }
 
   // Much more than usual is worth a second look.
   const usualAmount = senderProfile.usualSendCents || 0;
   if (usualAmount > 0 && transfer.amountCents > usualAmount * config.unusualAmountMultiplier) {
-    flags.push({ id: 'unusual_amount', reason: 'This is much more than you usually send.' });
+    flags.push({ id: 'unusual_amount', reason: 'This amount is significantly higher than your usual transfers.' });
   }
 
   // Many sends in a short time can mean someone is pressuring you.
   const recentSends = countRecentSends(history, config.manySendsHours);
   if (recentSends >= config.manySendsCount) {
-    flags.push({ id: 'many_sends', reason: 'You have sent money several times in the last day.' });
+    flags.push({ id: 'many_sends', reason: 'You have made several transfers in the past 24 hours.' });
   }
 
   return { flags };

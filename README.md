@@ -8,7 +8,7 @@ Built for the **GAIC x Tether Advanced AI Foundations Bootcamp** (November 2026)
 
 ## The problem
 
-Across Africa, millions of migrants and cross-border traders send money home through informal carriers and street money changers. Every country has its own name for them: *omalayitsha* in Zimbabwe, *onyamula katundu* in Malawi, *cambistas* in Mozambique and Angola, *hawala* networks in East Africa. The fee changes every month, the money passes through many hands, and sometimes it never arrives, with no receipt and no recourse. Scam messages pretending to be family make it worse.
+Across Africa, millions of migrants and cross-border traders send money home through informal carriers and street money changers. Every country has its own name for them: *omalayisha* in Zimbabwe, *onyamula katundu* in Malawi, *cambistas* in Mozambique and Angola, *hawala* networks in Swahili-speaking East Africa, including Kenya and Tanzania. The fee changes every month, the money passes through many hands, and sometimes it never arrives, with no receipt and no recourse. Scam messages pretending to be family make it worse.
 
 Thembeka starts in South Africa, home to migrants from across the continent, and is built to work for any African corridor.
 
@@ -85,6 +85,18 @@ Open **http://localhost:3000** in your browser. The first start downloads the mo
 2. Turn Wi-Fi **off**.
 3. Run the ID pre-check, the true-cost comparison and the safety check. They all work with no internet.
 4. Turn Wi-Fi back on for the final send (in testnet mode).
+
+## Offline proof
+
+These screenshots were taken on a Windows 11 laptop with **Wi-Fi switched off**. All three AI models ran locally through the QVAC SDK.
+
+| | |
+|---|---|
+| Wi-Fi off, local models ready | ![Wi-Fi off and offline checks ready](docs/screenshots/offline-wifi-off.png) |
+| Terminal: all three models loaded | ![Terminal showing the models loaded](docs/screenshots/offline-models-ready.png) |
+| ID pre-check: Review required | ![ID pre-check result](docs/screenshots/offline-kyc-review.png) |
+| Scam message: High risk | ![Scam check result](docs/screenshots/offline-scam-high-risk.png) |
+| Genuine request: Low risk | ![Genuine request result](docs/screenshots/offline-genuine-low-risk.png) |
 
 ## Demo walkthrough
 

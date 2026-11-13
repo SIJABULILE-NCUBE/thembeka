@@ -92,7 +92,7 @@ export async function withLoading(button, loadingText, task) {
 }
 
 export function stepsBar(currentStep) {
-  const labels = ['Details', 'Amount', 'Safety', 'Approve'];
+  const labels = ['Identity', 'Amount', 'Safety', 'Approval'];
   const bars = labels.map((label, index) => {
     const done = index < currentStep ? 'is-done' : '';
     return `<li class="${done}" aria-hidden="true"></li>`;

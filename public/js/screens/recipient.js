@@ -11,8 +11,8 @@ export async function show(screenArea) {
 
   if (!waiting) {
     screenArea.innerHTML = `
-      <h1 class="center">Hello, Grandma Moyo</h1>
-      <p class="center muted">No new money waiting right now.</p>
+      <h1 class="center">Welcome, Grandma Moyo</h1>
+      <p class="center muted">There are no pending transfers.</p>
       <button class="btn btn-secondary" id="back">Back</button>
     `;
     screenArea.querySelector('#back').addEventListener('click', () => goTo('home'));
@@ -20,11 +20,11 @@ export async function show(screenArea) {
   }
 
   screenArea.innerHTML = `
-    <h1 class="center">Hello, Grandma Moyo</h1>
-    <p class="center">Tendai sent you</p>
+    <h1 class="center">Welcome, Grandma Moyo</h1>
+    <p class="center">Tendai Moyo has sent you</p>
     <p class="recipient-amount">${formatUsd(waiting.amountUsdCents)}</p>
     <p class="center muted">Reference ${escapeHtml(waiting.reference)}</p>
-    <button class="btn btn-primary" id="received">Received</button>
+    <button class="btn btn-primary" id="received">Confirm receipt</button>
     <div id="recipient-error" class="error" role="alert"></div>
   `;
 
@@ -33,8 +33,8 @@ export async function show(screenArea) {
       await callApi('/send/confirm', { reference: waiting.reference });
       screenArea.innerHTML = `
         <img class="big-tick" src="img/logo.svg" alt="" />
-        <h1 class="center">Thank you!</h1>
-        <p class="center">Tendai can see that the money arrived.</p>
+        <h1 class="center">Receipt confirmed</h1>
+        <p class="center">Tendai Moyo has been notified that the funds arrived.</p>
       `;
     } catch (error) {
       screenArea.querySelector('#recipient-error').textContent = error.message;
