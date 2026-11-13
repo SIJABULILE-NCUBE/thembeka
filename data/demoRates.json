@@ -1,0 +1,41 @@
+{
+  "label": "Demo rates",
+  "note": "Fixed numbers for the demo only. Real rates come from the licensed provider.",
+  "randPerUsd": 18,
+  "options": [
+    {
+      "id": "thembeka",
+      "name": "Thembeka (USDT)",
+      "feeCents": 1500,
+      "rateMarkupPercent": 0.5,
+      "arrives": "Minutes",
+      "receipt": true
+    },
+    {
+      "id": "transfer_service",
+      "name": "Money transfer service",
+      "feeCents": 6000,
+      "rateMarkupPercent": 3,
+      "arrives": "Same day",
+      "receipt": true
+    },
+    {
+      "id": "bank",
+      "name": "Bank transfer",
+      "feeCents": 25000,
+      "rateMarkupPercent": 2.5,
+      "arrives": "2 to 3 days",
+      "receipt": true
+    },
+    {
+      "id": "informal",
+      "name": "Informal carrier",
+      "feePercentMin": 10,
+      "feePercentMax": 20,
+      "rateMarkupPercent": 5,
+      "arrives": "Days to weeks",
+      "receipt": false,
+      "warning": "The fee changes every month."
+    }
+  ]
+}

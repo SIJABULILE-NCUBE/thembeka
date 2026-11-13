@@ -1,0 +1,20 @@
+[
+  { "id": "s01", "pattern": "new_number_impersonation", "text": "Hi mum, this is my new number. My phone broke. Please send money for airtime and food today." },
+  { "id": "s02", "pattern": "new_number_impersonation", "text": "It's me your son, I lost my phone. Save this number and send R1,500, I will explain later." },
+  { "id": "s03", "pattern": "new_number_impersonation", "text": "Hey sis it's your cousin on a new line. I'm stuck, can you send me money quickly?" },
+  { "id": "s04", "pattern": "new_number_impersonation", "text": "Uncle, this is my other number. I am at the hospital and need cash for the bill now." },
+  { "id": "s05", "pattern": "urgency_pressure", "text": "Send the money right now or they will lock me out. There is no time, please hurry." },
+  { "id": "s06", "pattern": "urgency_pressure", "text": "I need this urgently before 5pm, do not call me just send it, I will pay back tomorrow." },
+  { "id": "s07", "pattern": "urgency_pressure", "text": "Emergency! Transfer immediately and don't tell anyone, I will explain everything later." },
+  { "id": "s08", "pattern": "prize_or_fee", "text": "Congratulations, you are our lucky winner! Pay a small release fee to receive your prize." },
+  { "id": "s09", "pattern": "prize_or_fee", "text": "Your parcel is waiting at customs. Pay the clearance fee today or it will be returned." },
+  { "id": "s10", "pattern": "prize_or_fee", "text": "You have won a cash prize from a radio station. Send R500 admin fee to claim it." },
+  { "id": "s11", "pattern": "fake_job", "text": "We have a job for you in Johannesburg. Pay R800 for the uniform and training first." },
+  { "id": "s12", "pattern": "fake_job", "text": "Work from home and earn R5,000 a week. Send a registration fee to start today." },
+  { "id": "s13", "pattern": "loan_fee", "text": "Your loan of R20,000 is approved. Pay the insurance fee first and we release the money." },
+  { "id": "s14", "pattern": "loan_fee", "text": "No credit check loan approved. Send the processing fee now so we can pay out." },
+  { "id": "s15", "pattern": "money_mule", "text": "I will send money into your account, keep R300 for yourself and send the rest to my friend." },
+  { "id": "s16", "pattern": "money_mule", "text": "Can you receive a payment for me? My account is blocked. Just forward it when it arrives." },
+  { "id": "s17", "pattern": "money_mule", "text": "Easy money: let us use your wallet to receive funds and pass them on, you get a share." },
+  { "id": "s18", "pattern": "romance", "text": "My love, I am stuck at the airport and they want a fee before I can travel to you. Please help." }
+]

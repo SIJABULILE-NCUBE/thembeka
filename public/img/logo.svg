@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Thembeka">
+  <!-- A simple shield with a tick: money that is protected on its way home. -->
+  <path d="M32 4 L56 13 V31 C56 46 45.5 56.5 32 60 C18.5 56.5 8 46 8 31 V13 Z" fill="#26a17b"/>
+  <path d="M32 4 L56 13 V31 C56 46 45.5 56.5 32 60 Z" fill="#1b7a5d"/>
+  <path d="M21 32 L29 40 L44 24" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

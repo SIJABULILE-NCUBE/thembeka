@@ -1,0 +1,23 @@
+{
+  "name": "thembeka",
+  "version": "1.0.0",
+  "description": "Send money home safely: offline KYC and scam checks with a human approval step.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:no-ai": "node server.js --no-ai",
+    "test": "node --test",
+    "check-models": "node scripts/checkModels.js"
+  },
+  "author": "Sijabulile Ncube",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.17"
+  },
+  "dependencies": {
+    "@qvac/sdk": "0.22.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2"
+  }
+}

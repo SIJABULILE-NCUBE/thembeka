@@ -1,0 +1,40 @@
+{
+  "note": "All people, documents and wallets here are fictional demo data.",
+  "tendai": {
+    "id": "tendai",
+    "accountName": "Tendai Moyo",
+    "role": "sender",
+    "usualSendCents": 150000,
+    "knownRecipients": ["grandma-moyo"],
+    "kycDetails": {
+      "fullName": "Tendai Moyo",
+      "documentType": "passport",
+      "issuingCountry": "Zimbabwe",
+      "documentNumber": "FN482913",
+      "dateOfBirth": "1995-03-14",
+      "expiryDate": "AUTO_2_MONTHS",
+      "nationality": "Zimbabwean"
+    }
+  },
+  "grandma-moyo": {
+    "id": "grandma-moyo",
+    "accountName": "Grandma Moyo",
+    "role": "recipient",
+    "walletLabel": "Grandma Moyo's wallet",
+    "walletAddress": "0xDEMO0000000000000000000000000000000GM01"
+  },
+  "unknown-sender": {
+    "id": "unknown-sender",
+    "accountName": "New contact",
+    "role": "recipient",
+    "walletLabel": "New contact",
+    "walletAddress": "0xDEMO0000000000000000000000000000000NEW1"
+  },
+  "steve": {
+    "id": "steve",
+    "accountName": "Steve Banda",
+    "role": "sender",
+    "usualSendCents": 400000,
+    "knownRecipients": []
+  }
+}
