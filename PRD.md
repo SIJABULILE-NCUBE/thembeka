@@ -126,7 +126,7 @@ In the app and pitch they are called **informal money carriers and changers**.
 | 3 | **Scam and money mule shield**: every send screened for red flags, held until confirmed | Yes | Fraud |
 | 4 | **True-cost comparison**: what the recipient actually gets per option, fee shown upfront | Yes | Finance |
 | 5 | **Recipient confirms**: the recipient taps to confirm money arrived, building a send history | Yes (simple) | Trust |
-| 6 | **African languages and voice**: Ndebele, Shona, Chichewa, Swahili, isiZulu; speak instead of type | Later | Inclusion |
+| 6 | **Voice and African languages**: speak a request and hear the result read aloud (local speech-to-text and text-to-speech), and AI translation into isiZulu, isiNdebele, Shona, Chichewa, Swahili and other African languages, all on the device | Later | Inclusion |
 
 **Out of scope for Demo Day**
 
@@ -146,7 +146,7 @@ In the app and pitch they are called **informal money carriers and changers**.
                                        +-----------------------------+------------+
                                        | pass / review                             | stop
                                        v                                           v
-   Saved to history  <-  Grandma confirms  <-  USDT sent  <-  APPROVE AND SEND   Payment held
+   Saved to history  <-  Recipient confirms  <-  USDT sent  <-  APPROVE AND SEND   Payment held
                                                               (the human step)   (reason explained)
 ```
 
@@ -158,8 +158,8 @@ The two checks run on the phone with no internet; only the approved send needs a
 2. **Wi-Fi off (10 s):** switch Wi-Fi off on screen.
 3. **KYC pre-check (20 s):** Tendai enters his Zimbabwean passport details. Thembeka spots it expires in 2 months and explains what to do.
 4. **Scam caught (30 s):** paste "Hi it's your brother, new number, send R2,000 urgently, don't tell mum." Result: **Stop**, with the reasons in plain language and the closest known scam it matches.
-5. **Genuine send (25 s):** Grandma Moyo's real request. Result: **Pass**. Cost comparison: "Grandma Moyo gets more with Thembeka, and the fee is fixed."
-6. **Wi-Fi on, approve (10 s):** Tendai taps **Approve and send**. USDT arrives; Grandma Moyo taps **Received**.
+5. **Genuine send (25 s):** the genuine school fees request. Result: **Pass**. Cost comparison: "Grandma Moyo gets more with Thembeka, and the fee is fixed."
+6. **Wi-Fi on, approve (10 s):** Tendai taps **Approve and send**. USDT arrives; Grandma Moyo selects **Confirm receipt**.
 7. **Close (5 s):** "Thembeka: money you can trust to arrive."
 
 ---
@@ -176,7 +176,7 @@ Mobile first: every screen is designed for a 360 px wide phone, then widens to a
 | S4 | **Scam check** | Box to paste the message that asked for money. Result card with risk level, reasons, closest known scam pattern | **Check this message** |
 | S5 | **Review and approve** | Summary: recipient, USDT amount, fee, scam result, KYC status. Review results show a required "I have called the person" tick box | **Approve and send** |
 | S6 | **Sent and confirmed** | Transaction reference, "Waiting for Grandma Moyo", then "Grandma Moyo confirmed" | **Done** |
-| S7 | **Recipient view** | Large text: amount received and from whom | **Received** |
+| S7 | **Recipient view** | Large text: amount received and from whom | **Confirm receipt** |
 | S8 | **History** | List of sends with date, amount, status | Tap to view receipt |
 
 **UX rules**
@@ -192,7 +192,7 @@ Mobile first: every screen is designed for a 360 px wide phone, then widens to a
 
 ## 8. Functional requirements
 
-Every check gives a clear result (**Pass**, **Review** or **Stop**), the reasons in plain language, and a next step. Nothing moves without the person's approval.
+Every check gives a clear result, the reasons in plain language, and a next step. Internally the three results are **Pass**, **Review** and **Stop**; on screen they read **Low risk**, **Review required** and **High risk**. Nothing moves without the person's approval.
 
 ### Who does what: KYC and fraud checks
 
@@ -234,7 +234,7 @@ Thembeka does a **pre-check** on the phone. The **licensed provider** does the *
 1. Before each send, the user can paste the message that asked for the money (WhatsApp, SMS).
 2. Code checks transfer red flags: new recipient, amount far above this user's usual send, many sends in a short time, recipient used by many senders.
 3. **Scam library search (embeddings):** the message is turned into an embedding and compared with a small library of known scam messages (impersonation, urgency, fake jobs or prizes, "receive and forward" money mule requests). The top 2 matches and their similarity scores are returned. This catches scams worded differently from any example, because it matches meaning rather than exact words.
-4. **Decision model:** a small decision model (Lia) classifies the message as Pass, Review or Stop and returns the probabilities as JSON in one step.
+4. **Decision model:** a small decision model (Laya) classifies the message as Pass, Review or Stop and returns the probabilities as JSON in one step.
 5. **Explanation:** Qwen3 writes the result in plain language and names the scam pattern it resembles.
 6. Code combines the red flags, the closest scam match and the decision model's result:
    - **Pass:** send normally.
@@ -261,7 +261,7 @@ Thembeka does a **pre-check** on the phone. The **licensed provider** does the *
 
 ### F5: Recipient confirms
 
-1. After sending, the recipient sees the amount and taps **Received**.
+1. After sending, the recipient sees the amount and selects **Confirm receipt**.
 2. The sender sees "Grandma Moyo confirmed" and the send is saved to history.
 
 ### Approval and send (all features)
@@ -286,7 +286,7 @@ Code makes every decision that must be exact; local AI reads language and explai
 | Transfer red flags (amount, frequency, new recipient) | Code | Numbers and rules, not language |
 | Cost comparison maths | Code | Money must be calculated, never guessed |
 | Finding similar known scams | Embedding model + scam library | Matches meaning, not exact words |
-| Classifying the message | Lia decision model | Fast, consistent JSON probabilities in one step |
+| Classifying the message | Laya decision model | Fast, consistent JSON probabilities in one step |
 | Plain-language explanation of every result | Qwen3 0.6B | Makes the app usable for non-experts |
 | Final Pass / Review / Stop | Code combines all three, human decides | No single point of failure |
 
@@ -296,7 +296,7 @@ Code makes every decision that must be exact; local AI reads language and explai
 |---|---|---|
 | Qwen3 0.6B Q4 (`QWEN3_600M_INST_Q4`) | Plain-language explanations | 380 MB |
 | Embedding model, e.g. Qwen3 Embedding 0.6B | Scam library search | 700 MB |
-| Lia decision model | Pass / Review / Stop probabilities | 300 MB |
+| Laya decision model | Pass / Review / Stop probabilities | 300 MB |
 
 Qwen3 is already downloaded and tested on a Windows 11 laptop (about 20 tokens per second, works with Wi-Fi off).
 
@@ -431,9 +431,9 @@ The look follows the USDT and Tether colour family: green and teal on clean whit
 
 | State | Colour | Icon | Word |
 |---|---|---|---|
-| Pass | `--green-dark` on `--green-soft` | Tick | "Looks safe" |
-| Review | `--ink` on `--review-soft`, `--review` border | Exclamation | "Check first" |
-| Stop | `--stop` on `--stop-soft` | Hand | "Stop" |
+| Pass | `--green-dark` on `--green-soft` | Tick | "Low risk" |
+| Review | `--ink` on `--review-soft`, `--review` border | Exclamation | "Review required" |
+| Stop | `--stop` on `--stop-soft` | Cross | "High risk" |
 
 ### Typography
 
@@ -472,13 +472,13 @@ The look follows the USDT and Tether colour family: green and teal on clean whit
 |              v                                                                      |
 |   Node.js + Express server                                                          |
 |      |-- Rules engine (code): KYC rules, transfer red flags, cost maths             |
-|      |-- Local AI (QVAC): scam library search, Lia decision, Qwen3 explanation      |
+|      |-- Local AI (QVAC): scam library search, Laya decision, Qwen3 explanation      |
 |      |-- WDK wallet: keys stay on the device, signs only after approval             |
 |                                                                                     |
 +-------------------------------------------------------------------------------------+
           |  (only after approval)                         |  (only after approval)
           v                                                v
-   Licensed provider                                 USDT network (test)  -->  Grandma's wallet
+   Licensed provider                                 USDT network (test)  -->  Grandma Moyo's wallet
    (receives approved KYC, rand conversion)
 ```
 
@@ -487,7 +487,7 @@ The look follows the USDT and Tether colour family: green and teal on clean whit
 | Runtime | Node.js 22.21.x | Tested with QVAC on Windows 11 |
 | Server | Express | Small, well known, easy to read |
 | Frontend | Plain HTML, CSS and JavaScript (no framework, no build step) | Simple to read, runs anywhere, fast on old phones |
-| Local AI | `@qvac/sdk` 0.22.0 with Qwen3 0.6B Q4, an embedding model and the Lia decision model | Runs offline on the device |
+| Local AI | `@qvac/sdk` 0.22.0 with Qwen3 0.6B Q4, an embedding model and the Laya decision model | Runs offline on the device |
 | Wallet | `@tetherto/wdk` + `@tetherto/wdk-wallet-evm`, USDT on a test network | Tether's self-custodial wallet kit |
 | Data | JSON files for sample profiles, messages, scam library and demo rates | No database needed for the demo |
 | Repo | Public GitHub repo `thembeka`, MIT licence | Required for Demo Day |
@@ -510,7 +510,7 @@ thembeka/
     ai/
       models.js           load and unload the three QVAC models
       scamSearch.js       embeddings search against the scam library
-      decision.js         Lia decision model: Pass / Review / Stop probabilities
+      decision.js         Laya decision model: Pass / Review / Stop probabilities
       explain.js          Qwen3 plain-language explanation as JSON
     checks/
       kycCheck.js         KYC hard rules and soft risks
@@ -555,7 +555,7 @@ thembeka/
 | POST | `/api/kyc/check` | Runs F2 rules and explanation | No |
 | POST | `/api/kyc/submit` | Sends approved KYC to the provider (simulated in demo) | Yes |
 | POST | `/api/cost` | Returns the 4-option comparison for an amount | No |
-| POST | `/api/scam/check` | Runs F3: red flags, scam search, Lia, explanation | No |
+| POST | `/api/scam/check` | Runs F3: red flags, scam search, Laya, explanation | No |
 | GET | `/api/wallet/balance` | USDT balance | Yes |
 | POST | `/api/send/prepare` | Builds the transfer and summary, does not send | No |
 | POST | `/api/send/approve` | Signs and sends, only with a valid prepared send id | Yes |
@@ -649,8 +649,8 @@ The code must read like a clear, real project that a junior developer can follow
 
 **Friday 13 November**
 
-- [ ] 12:00 office hours: confirm WDK calls, test network, Lia availability and judging criteria
-- [ ] F3 scam shield: red flags, scam library search, Lia, Qwen3 explanation, with fallbacks
+- [ ] 12:00 office hours: confirm WDK calls, test network, Laya availability and judging criteria
+- [ ] F3 scam shield: red flags, scam library search, Laya, Qwen3 explanation, with fallbacks
 - [ ] F4 cost comparison with labelled demo rates
 - [ ] WDK wallet: balance, prepare, approve, send on test network
 - [ ] F5 recipient confirm and history
@@ -669,7 +669,7 @@ The code must read like a clear, real project that a junior developer can follow
 | Risk | Fallback |
 |---|---|
 | WDK integration takes longer than planned | Simulated send screen, labelled, with the real code path in the repo |
-| Lia or the embedding model needs SDK 0.23 | Upgrade only the Thembeka project to 0.23 and retest; otherwise Qwen3 plus code rules |
+| Laya or the embedding model needs SDK 0.23 | Upgrade only the Thembeka project to 0.23 and retest; otherwise Qwen3 plus code rules |
 | Small model misreads a scam message | Code red flags and the scam library still catch it; JSON fallback to code-only result |
 | AI slow on the demo laptop | Pre-load all models before presenting; keep messages short |
 | Judges question regulation | Section 11 ready; positioned as sending home through licensed providers |

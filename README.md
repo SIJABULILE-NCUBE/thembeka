@@ -8,7 +8,9 @@ Built for the **GAIC x Tether Advanced AI Foundations Bootcamp** (November 2026)
 
 ## The problem
 
-Millions of African migrants send money home through informal carriers (*omalayitsha* in Zimbabwe, *onyamula katundu* in Malawi). The fee changes every month, the money passes through many hands, and sometimes it never arrives, with no receipt and no recourse. Scam messages pretending to be family make it worse.
+Across Africa, millions of migrants and cross-border traders send money home through informal carriers and street money changers. Every country has its own name for them: *omalayitsha* in Zimbabwe, *onyamula katundu* in Malawi, *cambistas* in Mozambique and Angola, *hawala* networks in East Africa. The fee changes every month, the money passes through many hands, and sometimes it never arrives, with no receipt and no recourse. Scam messages pretending to be family make it worse.
+
+Thembeka starts in South Africa, home to migrants from across the continent, and is built to work for any African corridor.
 
 ## What Thembeka does
 
@@ -18,7 +20,7 @@ Millions of African migrants send money home through informal carriers (*omalayi
 | 2. True cost | Shows what the recipient actually gets with each option, with a fixed fee upfront | On your device |
 | 3. Safety check | Checks the message that asked for money for scam and money mule warning signs | On your device, offline |
 | 4. You approve | Nothing is sent until you tap **Approve and send** | You decide |
-| 5. Recipient confirms | The recipient taps **Received**, so you know it arrived | Both devices |
+| 5. Recipient confirms | The recipient selects **Confirm receipt**, so the sender knows the funds arrived | Both devices |
 
 **Who does what:** Thembeka does the **pre-checks** on the device. The **licensed provider** does the **official** ID verification and ongoing monitoring. **You** always make the final decision.
 
@@ -31,7 +33,7 @@ The code rules decide what must be exact. The local AI reads language and explai
 | Transfer rules: new recipient, unusual amount, many sends | Code |
 | Warning words: new number, secrecy, urgency, pay-to-receive, money mule | Code |
 | Closest known scam, matched by meaning (not exact words) | EmbeddingGemma + a scam library (QVAC `embed`) |
-| Looks safe / needs checking / looks like a scam, as probabilities | Laya decision model (QVAC `decide`) |
+| Low risk, review or high risk, as probabilities | Laya decision model (QVAC `decide`) |
 | Plain-language explanation | Qwen3 0.6B (QVAC `completion`) |
 
 If any model is missing or slow, that step falls back to the code rules, so the app always works.
@@ -86,13 +88,13 @@ Open **http://localhost:3000** in your browser. The first start downloads the mo
 
 ## Demo walkthrough
 
-1. **Send money home**, then **Check my details**: the demo passport expires in 2 months, so the result is **Check first**.
-2. **Submit** to the Demo Licensed Provider, then **Continue**.
-3. **Compare the true cost** for R1,500: Grandma Moyo gets the most with Thembeka.
-4. Tap **Brother on a new number**, then **Check this message**: the result is **Stop**.
-5. Cancel, start again, and tap **Grandma Moyo's real request**: the result is **Looks safe**.
-6. **Approve and send**.
-7. Open **Grandma Moyo's view** in a second tab and tap **Received**. The first tab shows **Grandma Moyo confirmed**.
+1. Select **Send money home**, then **Check my details**. The demonstration passport expires within two months, so the result is **Review required**.
+2. Select **Submit to Demo Licensed Provider**, then **Continue**.
+3. Select **Compare total cost** for R1,500. Grandma Moyo receives the highest amount through Thembeka.
+4. Select **Scam: family member on a new number**, then **Check this message**. The result is **High risk**.
+5. Select **Cancel transfer**, start again, and select **Genuine request: school fees**. The result is **Low risk**.
+6. Select **Approve and send**.
+7. Open the recipient view in a second tab and select **Confirm receipt**. The first tab shows **Grandma Moyo has confirmed receipt**.
 
 ## Wallet modes
 
@@ -100,7 +102,7 @@ Set `WALLET_MODE` in `.env`:
 
 | Mode | What it does |
 |---|---|
-| `simulated` (default) | No real money moves. A demo wallet with 1,000 test dollars. Sends get a `SIM-` reference. |
+| `simulated` (default) | No funds are transferred. A demonstration wallet holds 1,000 test dollars, and each transfer receives a `SIM-` reference. |
 | `testnet` | Uses the WDK (`@tetherto/wdk-wallet-evm`) with test USDT on a test network. Needs `SEED_PHRASE`, `RPC_URL` and `USDT_TOKEN_ADDRESS` in `.env`. |
 
 Never commit `.env`: it's listed in `.gitignore`.
@@ -126,7 +128,7 @@ tests/                 rule tests (Node's built-in test runner)
 ## What works and what's next
 
 **Working and tested**
-- ID pre-check with clear Pass / Check first / Stop results (8 tests)
+- ID pre-check with clear Low risk / Review required / High risk results (8 tests)
 - Safety check: all 3 demo messages give the expected result using the code rules alone (14 tests)
 - True-cost comparison maths (4 tests)
 - Full send flow in simulated mode, tested in a browser at phone and laptop sizes
@@ -137,7 +139,8 @@ tests/                 rule tests (Node's built-in test runner)
 - Testnet sends need the WDK balance and transfer calls completed (`src/money/wallet.js`)
 - Exchange rates are fixed demo rates
 - Passport details are typed, not scanned
-- Next: African languages (Ndebele, Shona, Chichewa, Swahili, isiZulu) and voice input
+- Next: **voice**, so users can speak a request and hear the result read aloud, using QVAC's local speech-to-text and text-to-speech models
+- Next: **AI translation into African languages** such as isiZulu, isiNdebele, Shona, Chichewa and Swahili, running offline on the device
 
 ## Privacy
 
