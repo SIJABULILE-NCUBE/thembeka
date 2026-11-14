@@ -171,4 +171,6 @@ Node.js, Express, plain HTML/CSS/JavaScript, QVAC SDK 0.22.0 (Qwen3 0.6B, Embedd
 
 ## Licence
 
-MIT
+Copyright (c) 2026 Sijabulile Ncube. All rights reserved.
+
+This code is public for viewing and assessment only. It may not be copied, modified, distributed or used without written permission. See [LICENSE](LICENSE).
