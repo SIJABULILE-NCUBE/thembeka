@@ -127,6 +127,9 @@ In the app and pitch they are called **informal money carriers and changers**.
 | 4 | **True-cost comparison**: what the recipient actually gets per option, fee shown upfront | Yes | Finance |
 | 5 | **Recipient confirms**: the recipient taps to confirm money arrived, building a send history | Yes (simple) | Trust |
 | 6 | **Voice and African languages**: speak a request and hear the result read aloud (local speech-to-text and text-to-speech), and AI translation into isiZulu, isiNdebele, Shona, Chichewa, Swahili and other African languages, all on the device | Later | Inclusion |
+| 7 | **Pay for essentials directly**: the sender buys airtime, mobile data and prepaid electricity for family anywhere in Africa (for example ZESA tokens in Zimbabwe, EDM in Mozambique and KPLC in Kenya), paid in USDT through licensed partners, with the same safety checks as a send | Later | Product growth |
+| 8 | **Local currencies and live rates**: every amount shown in the recipient's own currency (for example rand, kwacha, metical, shilling, naira or cedi), using live rates from licensed providers, with the rate stated clearly before the sender approves | Later | Finance |
+| 9 | **Mobile money cash-out**: the recipient receives funds to a mobile money wallet or collects cash from a licensed agent near home | Later | Last mile |
 
 **Out of scope for Demo Day**
 
@@ -392,7 +395,9 @@ Exact fees are set with the licensed partner and tested with real senders.
 2. **Add nearby corridors:** Malawi and Mozambique, using the same app with local partners.
 3. **Grow through trust networks:** churches, burial societies, stokvels, community WhatsApp groups and cross-border traders' associations. People switch when someone they trust has already used it.
 4. **Reach people who don't read English comfortably:** Ndebele, Shona, Chichewa, Swahili and isiZulu, plus voice input and read-aloud results.
-5. **Expand across Africa:** any corridor where people already rely on informal carriers and changers.
+5. **Pay for essentials, not only cash:** airtime, data and prepaid electricity bought directly for the family, so money reaches its purpose and cannot be diverted.
+6. **Speak every family's currency:** amounts in the recipient's local currency, with cash-out to mobile money or a licensed agent.
+7. **Expand across Africa:** any corridor where people already rely on informal carriers and changers.
 
 **Why this founder**
 
@@ -490,7 +495,7 @@ The look follows the USDT and Tether colour family: green and teal on clean whit
 | Local AI | `@qvac/sdk` 0.22.0 with Qwen3 0.6B Q4, an embedding model and the Laya decision model | Runs offline on the device |
 | Wallet | `@tetherto/wdk` + `@tetherto/wdk-wallet-evm`, USDT on a test network | Tether's self-custodial wallet kit |
 | Data | JSON files for sample profiles, messages, scam library and demo rates | No database needed for the demo |
-| Repo | Public GitHub repo `thembeka`, MIT licence | Required for Demo Day |
+| Repo | Public GitHub repo `thembeka`, all rights reserved (viewing and assessment only) | Required for Demo Day |
 
 ---
 
@@ -500,7 +505,7 @@ The look follows the USDT and Tether colour family: green and teal on clean whit
 thembeka/
   README.md               how to install, run and test, plus what works and what's next
   PRD.md                  this document
-  LICENSE                 MIT
+  LICENSE                 all rights reserved
   package.json            scripts: start, check-models
   .env.example            names of the secrets needed, with no real values
   .gitignore              node_modules, .env

@@ -153,6 +153,10 @@ tests/                 rule tests (Node's built-in test runner)
 - Passport details are typed, not scanned
 - Next: **voice**, so users can speak a request and hear the result read aloud, using QVAC's local speech-to-text and text-to-speech models
 - Next: **AI translation into African languages** such as isiZulu, isiNdebele, Shona, Chichewa and Swahili, running offline on the device
+- Next: **pay for essentials directly**, so the sender can buy airtime, mobile data and prepaid electricity for family anywhere in Africa, paid in USDT through licensed partners and checked by the same safety rules
+- Next: **local currencies**, so every amount is shown in the recipient's own currency (for example rand, kwacha, metical, shilling, naira or cedi) with the exchange rate stated clearly before the sender approves
+- Next: **live exchange rates** from licensed providers, replacing the fixed demo rates
+- Next: **mobile money cash-out**, so the recipient can receive funds to a mobile money wallet or collect cash from a licensed agent near home
 
 ## Privacy
 
