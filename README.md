@@ -4,6 +4,11 @@
 
 Built for the **GAIC x Tether Advanced AI Foundations Bootcamp** (November 2026) with Tether's **QVAC SDK** for local AI and the **Wallet Development Kit (WDK)** for USDT.
 
+## Demo video
+
+- ▶️ [Part 1: Thembeka demo](https://www.loom.com/share/e120dbf0fae94b88ae57d8838888916d)
+- ▶️ [Part 2: Thembeka demo](https://www.loom.com/share/a472a37474ac4a8aa6a54f0c2a3ea2df)
+
 ---
 
 ## The problem
